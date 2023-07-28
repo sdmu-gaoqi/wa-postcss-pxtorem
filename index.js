@@ -10,7 +10,8 @@ const defaults = {
   replace: true,
   mediaQuery: false,
   minPixelValue: 0,
-  exclude: null
+  exclude: null,
+  unit: "px"
 };
 
 const legacyOptions = {
@@ -119,6 +120,7 @@ function createPropListMatcher(propList) {
 module.exports = (options = {}) => {
   convertLegacyOptions(options);
   const opts = Object.assign({}, defaults, options);
+  const { unit } = opts;
   const satisfyPropList = createPropListMatcher(opts.propList);
   const exclude = opts.exclude;
   let isExcludeFile = false;
@@ -152,13 +154,13 @@ module.exports = (options = {}) => {
       if (isExcludeFile) return;
 
       if (
-        decl.value.indexOf("px") === -1 ||
+        decl.value.indexOf(unit) === -1 ||
         !satisfyPropList(decl.prop) ||
         blacklistedSelector(opts.selectorBlackList, decl.parent.selector)
       )
         return;
 
-      const value = decl.value.replace(pxRegex, pxReplace);
+      const value = decl.value.replace(pxRegex(unit), pxReplace);
 
       // if rem unit already exists, do not add or replace
       if (declarationExists(decl.parent, decl.prop, value)) return;
@@ -173,8 +175,8 @@ module.exports = (options = {}) => {
       if (isExcludeFile) return;
 
       if (opts.mediaQuery && atRule.name === "media") {
-        if (atRule.params.indexOf("px") === -1) return;
-        atRule.params = atRule.params.replace(pxRegex, pxReplace);
+        if (atRule.params.indexOf(unit) === -1) return;
+        atRule.params = atRule.params.replace(pxRegex(unit), pxReplace);
       }
     }
   };
