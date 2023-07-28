@@ -6,7 +6,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cuth/postcss-pxtorem.git"
+    "url": "git@github.com:cuth/postcss-pxtorem.git",
+    "pub": "yarn publish --registry=https://registry.npmjs.org/."
   },
   "bugs": "https://github.com/cuth/postcss-pxtorem/issues",
   "main": "index.js",
