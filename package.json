@@ -1,15 +1,17 @@
 {
-  "name": "wa-postcss-pxtorem",
+  "name": "@wagq/wa-postcss-pxtorem",
   "description": "A CSS post-processor that converts px to rem.",
-  "version": "6.0.0",
+  "version": "0.1.0",
   "author": "cuth",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cuth/postcss-pxtorem.git",
+    "url": "git+ssh://git@github.com/cuth/postcss-pxtorem.git",
     "pub": "yarn publish --registry=https://registry.npmjs.org/."
   },
-  "bugs": "https://github.com/cuth/postcss-pxtorem/issues",
+  "bugs": {
+    "url": "https://github.com/cuth/postcss-pxtorem/issues"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -19,6 +21,10 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "lint-staged": {
     "*.js": [
@@ -44,5 +50,10 @@
   ],
   "peerDependencies": {
     "postcss": "^8.0.0"
-  }
+  },
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "homepage": "https://github.com/cuth/postcss-pxtorem#readme"
 }
